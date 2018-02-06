@@ -14,6 +14,7 @@ $(function () {
                     '<div class="img-circle-div">' +
                     '<h3>' + response.author + '</h3>' +
                     '<p>' + response.content + '</p>' +
+                    '<p>Comments: ' + response.comments + '</p>' +
                     '<p>' + response.created_at + '</p>' +
                     '<a href="/post/show/' + response.id + '">Go to →</a>' +
                     '</div>');
@@ -41,6 +42,9 @@ $(function () {
                     '<hr>' +
                     '</div>');
                 $this[0].reset();
+
+                var $counter = $('.js-comments-counter').find('span');
+                $counter.text(parseInt($counter.text()) + 1);
             }
         });
     });

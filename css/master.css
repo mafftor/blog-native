@@ -290,7 +290,7 @@ a {
 }
 
 a:hover {
-    color: #425d29
+    color: black;
 }
 
 #main-header {
@@ -812,8 +812,6 @@ footer {
 
 .btn:hover, :focus {
     text-decoration: none;
-    background: #689240;
-    color: #fff
 }
 
 .btn:active, .active {

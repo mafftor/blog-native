@@ -4,6 +4,7 @@
 <div class="container">
     <h3><?= $post->author ?></h3>
     <p><?= $post->content ?></p>
+    <p class="js-comments-counter">Comments: <span><?= count($comments) ?></span></p>
     <p><?= date('d M H:i', strtotime($post->created_at)) ?></p>
     <a href="#" onclick="window.history.back();">← Go back</a>
 </div>

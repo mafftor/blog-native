@@ -19,6 +19,7 @@ class PostController extends Controller
 
         $data['id'] = DB::lastInsertId();
         $data['content'] = $this->strLimit($data['content']);
+        $data['comments'] = 0;
         $data += [
             'created_at' => date('d M H:i'),
         ];

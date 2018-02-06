@@ -50,6 +50,7 @@
                 <div class="img-circle-div">
                     <h3><?= $post->author ?></h3>
                     <p><?= $post->short ?></p>
+                    <p>Comments: <b><?= $post->pc_count ?></b></p>
                     <p><?= date('d M H:i', strtotime($post->created_at)) ?></p>
                     <a href="/post/show/<?= $post->id ?>">Go to →</a>
                 </div>

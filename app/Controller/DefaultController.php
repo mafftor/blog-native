@@ -33,7 +33,8 @@ class DefaultController extends Controller
      */
     private function getPosts(): array
     {
-        return DB::query('SELECT * FROM post ORDER by created_at DESC')->fetchAll(PDO::FETCH_OBJ);
+        return DB::query('SELECT p.*, COUNT(pc.post_id) AS pc_count FROM post AS p LEFT JOIN post_comment AS pc ON p.id = pc.post_id GROUP BY p.id ORDER by created_at DESC')
+            ->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
