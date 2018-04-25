@@ -5,6 +5,8 @@
 * Refresh page for see changes
 
 ### Information
+Admin Panel `/admin`
+
 Default accounts:
 Login/Password
 * admin/admin
