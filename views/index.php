@@ -25,23 +25,6 @@
     </div>
 </section>
 
-<!-- First call to action -->
-<section class="call-to-action">
-    <div class="cta-container">
-        <form class="custom__form js-form-post-store" action="/post/store" method="post">
-            <div>
-                <input type="text" name="author" placeholder="Author" required>
-            </div>
-            <div>
-                <textarea name="content" rows="4" placeholder="Content" required></textarea>
-            </div>
-            <div>
-                <button class="btn" type="submit">Create the Post →</button>
-            </div>
-        </form>
-    </div>
-</section>
-
 <!-- Three Images Section -->
 <section id="three-images">
     <div class="container">

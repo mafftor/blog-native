@@ -1,5 +1,5 @@
 $(function () {
-    $('.js-form-post-store').submit(function (e) {
+    $('#form-login').submit(function (e) {
         e.preventDefault();
 
         var $this = $(this);
@@ -9,16 +9,10 @@ $(function () {
             method: $this.attr('method'),
             data: $this.serialize(),
             success: function (response) {
-                console.log(response);
-                $('#three-images').find('article').prepend(
-                    '<div class="img-circle-div">' +
-                    '<h3>' + response.author + '</h3>' +
-                    '<p>' + response.content + '</p>' +
-                    '<p>Comments: ' + response.comments + '</p>' +
-                    '<p>' + response.created_at + '</p>' +
-                    '<a href="/post/show/' + response.id + '">Go to →</a>' +
-                    '</div>');
-                $this[0].reset();
+                window.location.reload();
+            },
+            error: function (error) {
+                alert(error.responseJSON.error);
             }
         });
     });

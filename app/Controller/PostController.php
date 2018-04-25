@@ -7,24 +7,31 @@ use PDO;
 
 class PostController extends Controller
 {
+    public function indexAction()
+    {
+        $this->checkLogin();
+        $data['posts'] = $this->getPosts();
+        foreach ($data['posts'] as $key => $post) {
+            $data['posts'][$key]->short = $this->strLimit($post->content);
+        }
+
+        $data['categories'] = $this->getCategories();
+
+        $this->view('admin/post/index', $data);
+    }
+
     public function storeAction()
     {
         $data = [
+            'category_id' => $_POST['category_id'] ?? null,
             'author' => $_POST['author'] ?? null,
             'content' => $_POST['content'] ?? null,
         ];
 
-        $result = DB::prepare('INSERT INTO post (author, content) VALUES (:author, :content)');
+        $result = DB::prepare('INSERT INTO post (category_id, author, content) VALUES (:category_id, :author, :content)');
         $result->execute($data);
 
-        $data['id'] = DB::lastInsertId();
-        $data['content'] = $this->strLimit($data['content']);
-        $data['comments'] = 0;
-        $data += [
-            'created_at' => date('d M H:i'),
-        ];
-
-        $this->responseJson($data);
+        $this->redirectTo('/post');
     }
 
     public function showAction($id)
@@ -42,5 +49,37 @@ class PostController extends Controller
         }
 
         $this->view('show', $data);
+    }
+
+    public function editAction($id)
+    {
+        $data['post'] = DB::query('SELECT * FROM post WHERE id = ' . $id . ' LIMIT 1')
+            ->fetchObject();
+
+        $data['categories'] = $this->getCategories();
+
+        $this->view('admin/post/edit', $data);
+    }
+
+    public function updateAction()
+    {
+        $data = [
+            'id' => $_POST['id'] ?? null,
+            'category_id' => $_POST['category_id'] ?? null,
+            'author' => $_POST['author'] ?? null,
+            'content' => $_POST['content'] ?? null,
+        ];
+
+        $result = DB::prepare('UPDATE post SET category_id = :category_id, author = :author, content = :content WHERE id = :id');
+        $result->execute($data);
+
+        $this->redirectTo('/post');
+    }
+
+    public function deleteAction($id)
+    {
+        $result = DB::query('DELETE FROM post WHERE id = ' . $id);
+
+        $this->redirectTo('/post');
     }
 }
